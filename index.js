@@ -1,53 +1,40 @@
-// navbar Scroll
-window.addEventListener('scroll', function(){
-    let navbar = document.querySelector('.navbar');
-    if(this.window.scrollY > 20){
-        navbar.classList.add('scrolled')
-    }else{
-        navbar.classList.remove('scrolled')
-    }
-});
-
-
-//Scroll up
-document.querySelector('#to-top').addEventListener('click',()=>{
-
-    let TopInterval = setInterval(()=>{
-      
-        let ArrowTop = document.body.scrollTop > 0 ? document.body : document.documentElement;
-
-        if(ArrowTop.scrollTop > 0){
-            ArrowTop.scrollTop = ArrowTop.scrollTop - 50;
-        }
-        if(ArrowTop.scrollTop < 1){
-            clearInterval(TopInterval)
-        }
-    },10)
-}, false);
-
-
-function showscroll(){
-    let TopButton = document.getElementById('to-top');
-    if(document.body.scrollTop > 100 || document.documentElement.scrollTop > 100){
-        TopButton.classList.add('show')
-    }else{
-        TopButton.classList.remove('show')
-    }
-}
-
-window.onscroll = () =>{
-    showscroll();
-}
-
-// navbar toggle
-
-const menuBtn = document.getElementById('menu_btn')
-const navLinks = document.getElementById('nav_links')
-const menuIcon = document.querySelector('i');
-
-menuBtn.addEventListener('click',(e)=>{
-    navLinks.classList.toggle('open')
-
-    const isOpen = navLinks.classList.contains('open')
-    menuIcon.setAttribute('class', isOpen ? 'ri-close-line' : 'ri-menu-line')
-})
+const menuBtn = document.getElementById('menu_btn');
+        const navLinks = document.getElementById('nav_links');
+        
+        menuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('open');
+        });
+        
+        // Close menu when clicking a link
+        document.querySelectorAll('.nav_items a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('open');
+            });
+        });
+        
+        // Scroll to Top Button
+        const toTop = document.getElementById('to-top');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                toTop.classList.add('show');
+            } else {
+                toTop.classList.remove('show');
+            }
+        });
+        
+        toTop.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Navbar scroll effect
+        const navbar = document.querySelector('.navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
